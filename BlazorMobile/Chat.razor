@@ -2,22 +2,23 @@
 
     <StackLayout Orientation="StackOrientation.Horizontal" HorizontalOptions="LayoutOptions.Center">
 
-        <Button Text="Increment" OnClick="@IncrementCount" />
+        <Button Text="Decrement" OnClick="@IncrementCount" />
 
         <Label Text="@("The button was clicked " + count + " times")"
-                FontAttributes="FontAttributes.Bold"
-                VerticalTextAlignment="TextAlignment.Center" />
+               FontAttributes="FontAttributes.Bold"
+               VerticalTextAlignment="TextAlignment.Center" />
 
     </StackLayout>
 
 </Frame>
 
-@code
-{
-    int count;
+@code {
+
+    int count = 100000;
 
     void IncrementCount()
     {
-        count++;
+        count--;
+        //this.Do();
     }
 }
