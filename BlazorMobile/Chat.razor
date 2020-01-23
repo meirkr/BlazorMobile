@@ -4,21 +4,10 @@
 
         <Button Text="Decrement" OnClick="@IncrementCount" />
 
-        <Label Text="@("The button was clicked " + count + " times")"
+        <Label Text="@("The button was clicked " + count + " times" + this.GetType())"
                FontAttributes="FontAttributes.Bold"
                VerticalTextAlignment="TextAlignment.Center" />
 
     </StackLayout>
 
 </Frame>
-
-@code {
-
-    int count = 100000;
-
-    void IncrementCount()
-    {
-        count--;
-        //this.Do();
-    }
-}

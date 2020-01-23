@@ -1,8 +1,17 @@
 ﻿
-public partial class Chat
+
+
+namespace BlazorMobile
 {
-    private void Do()
+    public partial class Chat
     {
 
+        int count = 100000;
+
+        void IncrementCount()
+        {
+            count--;
+        }
     }
+
 }
