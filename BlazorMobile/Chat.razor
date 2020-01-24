@@ -1,10 +1,12 @@
-﻿<Frame CornerRadius="10" BackgroundColor="Color.LightBlue">
+﻿@*@inject Microsoft.AspNetCore.SignalR.Client.HubConnectionBuilder hubConnectionBuilder*@
+
+<Frame CornerRadius="10" BackgroundColor="Color.LightBlue">
 
     <StackLayout Orientation="StackOrientation.Horizontal" HorizontalOptions="LayoutOptions.Center">
 
-        <Button Text="Decrement" OnClick="@IncrementCount" />
+        @*<Button Text="Decrement" OnClick="@IncrementCount" />*@
 
-        <Label Text="@("The button was clicked " + count + " times" + this.GetType())"
+        <Label Text="@("msg: " + _lastMsg)"
                FontAttributes="FontAttributes.Bold"
                VerticalTextAlignment="TextAlignment.Center" />
 
