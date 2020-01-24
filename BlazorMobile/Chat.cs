@@ -39,12 +39,15 @@ namespace BlazorMobile
                     this.StateHasChanged();
                 });
 
-            _ =  _hubConnection.Start();
 
             await base.OnInitializedAsync();
         }
 
+        private void OnClick()
+        {
+            _ = _hubConnection.Start();
 
+        }
     }
 
 }
