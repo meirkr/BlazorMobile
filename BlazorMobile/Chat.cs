@@ -7,7 +7,6 @@ namespace BlazorMobile
     public partial class Chat
     {
         private HubConnection _hubConnection;
-        string _connectId;
         private string _lastMsg;
 
         //public Chat(IHubConnectionBuilder hubConnectionBuilder)
@@ -37,9 +36,10 @@ namespace BlazorMobile
                 (msg =>
                 {
                     this._lastMsg = msg;
+                    this.StateHasChanged();
                 });
 
-            await _hubConnection.Start();
+            _ =  _hubConnection.Start();
 
             await base.OnInitializedAsync();
         }
