@@ -2,6 +2,7 @@
 using Microsoft.MobileBlazorBindings;
 using Microsoft.Extensions.Hosting;
 using Xamarin.Forms;
+using Microsoft.AspNetCore.SignalR.Client;
 
 namespace BlazorMobile
 {

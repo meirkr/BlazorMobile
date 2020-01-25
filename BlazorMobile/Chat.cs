@@ -1,6 +1,6 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNet.SignalR.Client;
-using Microsoft.AspNet.SignalR.Client.Hubs;
+﻿using System;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.SignalR.Client;
 
 namespace BlazorMobile
 {
@@ -15,8 +15,11 @@ namespace BlazorMobile
         //}
         protected async override Task OnInitializedAsync()
         {
-            const string url = "ws://meirkr.com/chat";
-            _hubConnection = new HubConnection(url);
+            const string url = "http://meirkr.com/chat";
+            _hubConnection = new HubConnectionBuilder()
+                .WithUrl(url)
+                .WithAutomaticReconnect()
+                .Build();
 
 
             //_hubConnection.Reconnected += (connected =>
@@ -32,12 +35,16 @@ namespace BlazorMobile
             //    _lastMsg = msg;
             //    base.StateHasChanged();
             //});
-            _hubConnection.Received +=
-                (msg =>
-                {
-                    this._lastMsg = msg;
-                    this.StateHasChanged();
-                });
+
+            _hubConnection.On<string, string>("sendToAll", (user, msg)
+                =>
+            {
+                //_user = user;
+                _lastMsg = msg;
+
+                base.StateHasChanged();
+            });
+
 
 
             await base.OnInitializedAsync();
@@ -45,8 +52,22 @@ namespace BlazorMobile
 
         private void OnClick()
         {
-            _ = _hubConnection.Start();
+            _ = StartSignalr();
 
+        }
+
+        private async Task StartSignalr()
+        {
+            try
+            {
+                await _hubConnection.StartAsync();
+                System.Diagnostics.Trace.WriteLine("---------- connected!");
+            }
+            catch(Exception e)
+            {
+                System.Diagnostics.Trace.WriteLine("---------- exception:\n!" + e);
+
+            }
         }
     }
 
